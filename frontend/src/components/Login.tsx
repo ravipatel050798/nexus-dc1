@@ -119,7 +119,7 @@ export default function Login() {
                     </form>
 
                     <div className="mt-8 text-center border-t border-white/5 pt-6">
-                        <p className="text-[10px] text-slate-500 uppercase tracking-[0.3em] mb-2">
+                        <p className="text-[10px] text-slate-500 mb-2">
                             Default Access: admin / nexus123
                         </p>
                         <p className="text-[10px] text-well-green uppercase tracking-[0.3em] font-bold">
