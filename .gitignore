@@ -1,0 +1,29 @@
+# node_modules
+node_modules/
+dist/
+build/
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+
+# env
+.env
+.venv
+env/
+venv/
+ENV/
+
+# Database
+*.db
+*.sqlite3
+nexus_fleet.db
+nexus.db
+
+# OS
+.DS_Store
+.AppleDouble
+.LSOverride
