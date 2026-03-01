@@ -20,7 +20,7 @@ export default function Login() {
             formData.append('username', username);
             formData.append('password', password);
 
-            const response = await fetch('http://localhost:8000/api/token', {
+            const response = await fetch(`${import.meta.env.VITE_API_URL || 'http://localhost:10000'}/api/token`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/x-www-form-urlencoded',
