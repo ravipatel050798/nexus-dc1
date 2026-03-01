@@ -100,7 +100,8 @@ const AppContent = () => {
         const fetchDevices = async () => {
             if (!token) return;
             try {
-                const response = await fetch(`${import.meta.env.VITE_API_URL || 'http://localhost:10000'}/api/devices`, {
+                const baseUrl = (import.meta.env.VITE_API_URL || 'http://localhost:10000').replace(/\/$/, "");
+                const response = await fetch(`${baseUrl}/api/devices`, {
                     headers: { 'Authorization': `Bearer ${token}` }
                 });
                 if (response.status === 401) { logout(); return; }
@@ -130,7 +131,8 @@ const AppContent = () => {
         const fetchAnalytics = async () => {
             if (!token || activeTab !== 'analytics') return;
             try {
-                const response = await fetch(`${import.meta.env.VITE_API_URL || 'http://localhost:10000'}/api/analytics`, {
+                const baseUrl = (import.meta.env.VITE_API_URL || 'http://localhost:10000').replace(/\/$/, "");
+                const response = await fetch(`${baseUrl}/api/analytics`, {
                     headers: { 'Authorization': `Bearer ${token}` }
                 });
                 if (response.status === 401) { logout(); return; }
@@ -152,7 +154,8 @@ const AppContent = () => {
         setProgress(0);
 
         // Concurrent progress bar and API call
-        const apiPromise = fetch(`${import.meta.env.VITE_API_URL || 'http://localhost:10000'}/api/onboard`, { method: 'POST' });
+        const baseUrl = (import.meta.env.VITE_API_URL || 'http://localhost:10000').replace(/\/$/, "");
+        const apiPromise = fetch(`${baseUrl}/api/onboard`, { method: 'POST' });
 
         const interval = setInterval(() => {
             setProgress(p => {

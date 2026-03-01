@@ -17,10 +17,11 @@ export default function Login() {
 
         try {
             const formData = new URLSearchParams();
-            formData.append('username', username);
+            formData.append('username', username.trim());
             formData.append('password', password);
 
-            const response = await fetch(`${import.meta.env.VITE_API_URL || 'http://localhost:10000'}/api/token`, {
+            const baseUrl = (import.meta.env.VITE_API_URL || 'http://localhost:10000').replace(/\/$/, "");
+            const response = await fetch(`${baseUrl}/api/token`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/x-www-form-urlencoded',
@@ -29,7 +30,12 @@ export default function Login() {
             });
 
             if (!response.ok) {
-                throw new Error('Invalid credentials');
+                let errorMsg = 'Invalid credentials';
+                try {
+                    const errorData = await response.json();
+                    if (errorData.detail) errorMsg = errorData.detail;
+                } catch (e) { }
+                throw new Error(`${errorMsg} (HTTP ${response.status})`);
             }
 
             const data = await response.json();
@@ -76,7 +82,7 @@ export default function Login() {
                                     value={username}
                                     onChange={(e) => setUsername(e.target.value)}
                                     placeholder="admin"
-                                    className="w-full bg-[#0a0f1c] border border-white/5 rounded-lg py-4 pl-12 pr-4 text-sm text-white focus:outline-none focus:border-well-green/50 placeholder-slate-600 tracking-widest uppercase"
+                                    className="w-full bg-[#0a0f1c] border border-white/5 rounded-lg py-4 pl-12 pr-4 text-sm text-white focus:outline-none focus:border-well-green/50 placeholder-slate-600 tracking-widest"
                                     required
                                 />
                             </div>
@@ -90,7 +96,7 @@ export default function Login() {
                                     value={password}
                                     onChange={(e) => setPassword(e.target.value)}
                                     placeholder="nexus123"
-                                    className="w-full bg-[#0a0f1c] border border-white/5 rounded-lg py-4 pl-12 pr-4 text-sm text-white focus:outline-none focus:border-well-green/50 placeholder-slate-600 tracking-widest uppercase"
+                                    className="w-full bg-[#0a0f1c] border border-white/5 rounded-lg py-4 pl-12 pr-4 text-sm text-white focus:outline-none focus:border-well-green/50 placeholder-slate-600 tracking-widest"
                                     required
                                 />
                             </div>
