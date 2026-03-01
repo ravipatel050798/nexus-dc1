@@ -112,6 +112,11 @@ class ConnectionManager:
 
 manager = ConnectionManager()
 
+@app.get("/")
+@app.head("/")
+def health_check():
+    return {"status": "healthy", "service": "nexus-backend"}
+
 # Jira Integration Logic
 def create_jira_issue(device_id: str, reason: str):
     ticket_id = f"WMS-{random.randint(1000, 9999)}"
