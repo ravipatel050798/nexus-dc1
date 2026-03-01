@@ -8,6 +8,12 @@ services:
     envVars:
       - key: PYTHON_VERSION
         value: 3.11.0
+      - key: RENDER_DISK_PATH
+        value: /var/data/nexus_fleet.db
+    disk:
+      name: nexus-data
+      mountPath: /var/data
+      sizeGB: 1
 
   - type: web
     name: nexus-frontend
